@@ -4,6 +4,12 @@
  */
 package br.com.login.view;
 
+import br.com.login.controller.LoginController;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 /**
  *
  * @author pc
@@ -28,25 +34,17 @@ public class LoginView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        BotaoEntrar = new javax.swing.JButton();
+        jTextFieldLogin = new javax.swing.JTextField();
+        jPasswordFieldSenha = new javax.swing.JPasswordField();
         BotaoCadastro = new javax.swing.JButton();
+        jButtonEntrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela de login");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 230, 30));
-
-        jPasswordField1.setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 230, 30));
-
-        BotaoEntrar.setContentAreaFilled(false);
-        BotaoEntrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(BotaoEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, 120, 50));
+        getContentPane().add(jTextFieldLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 230, 30));
+        getContentPane().add(jPasswordFieldSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 230, 30));
 
         BotaoCadastro.setContentAreaFilled(false);
         BotaoCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -57,8 +55,17 @@ public class LoginView extends javax.swing.JFrame {
         });
         getContentPane().add(BotaoCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 420, 190, 30));
 
+        jButtonEntrar.setContentAreaFilled(false);
+        jButtonEntrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEntrarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, 140, 50));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/LOGIN.jpeg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 0, 400, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 400, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -69,6 +76,38 @@ public class LoginView extends javax.swing.JFrame {
         CADASTRO.setVisible(true);
     }//GEN-LAST:event_BotaoCadastroActionPerformed
 
+    private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
+        if(jTextFieldLogin.getText().matches("") || jPasswordFieldSenha.getText().matches("")){
+            JOptionPane.showMessageDialog(rootPane, "Prencha todos os campos!!");
+        }else{
+        
+        try {
+            LoginController login = new LoginController();
+            login.loginUsuario(this);
+        } catch (SQLException ex) {
+            System.getLogger(LoginView.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        }
+    }//GEN-LAST:event_jButtonEntrarActionPerformed
+
+    public JPasswordField getjPasswordFieldSenha() {
+        return jPasswordFieldSenha;
+    }
+
+    public void setjPasswordFieldSenha(JPasswordField jPasswordFieldSenha) {
+        this.jPasswordFieldSenha = jPasswordFieldSenha;
+    }
+
+    public JTextField getjTextFieldLogin() {
+        return jTextFieldLogin;
+    }
+
+    public void setjTextFieldLogin(JTextField jTextFieldLogin) {
+        this.jTextFieldLogin = jTextFieldLogin;
+    }
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -96,9 +135,9 @@ public class LoginView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotaoCadastro;
-    private javax.swing.JButton BotaoEntrar;
+    private javax.swing.JButton jButtonEntrar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField jPasswordFieldSenha;
+    private javax.swing.JTextField jTextFieldLogin;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,6 +4,11 @@
  */
 package br.com.login.view;
 
+import br.com.login.controller.LoginController;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 /**
  *
  * @author pc
@@ -28,24 +33,18 @@ public class CadastroView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        jTextFieldSenha = new javax.swing.JTextField();
+        jTextFieldNome = new javax.swing.JTextField();
+        jTextFieldEmail = new javax.swing.JTextField();
         BotaoCadastrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela de login");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 200, 30));
-
-        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 200, 30));
-
-        jTextField3.setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 200, 30));
+        getContentPane().add(jTextFieldSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 200, 30));
+        getContentPane().add(jTextFieldNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 200, 30));
+        getContentPane().add(jTextFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 200, 30));
 
         BotaoCadastrar.setContentAreaFilled(false);
         BotaoCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -54,7 +53,7 @@ public class CadastroView extends javax.swing.JFrame {
                 BotaoCadastrarActionPerformed(evt);
             }
         });
-        getContentPane().add(BotaoCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 120, 40));
+        getContentPane().add(BotaoCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 120, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/CADASTRO.jpeg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, -10, 340, 410));
@@ -64,9 +63,47 @@ public class CadastroView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoCadastrarActionPerformed
-
+        
+        if(jTextFieldNome.getText().matches(" ") || jTextFieldEmail.getText().matches(" ") || jTextFieldSenha.getText().matches(" ")){
+            JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos!!");
+            
+        }else {
+            LoginController cadastro = new LoginController();
+        try {
+            cadastro.cadastroUsuario(this);
+        } catch (SQLException ex) {
+            System.getLogger(CadastroView.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        this.setVisible(false);}
     }//GEN-LAST:event_BotaoCadastrarActionPerformed
 
+    public JTextField getjTextFieldEmail() {
+        return jTextFieldEmail;
+    }
+
+    public void setjTextFieldEmail(JTextField jTextFieldEmail) {
+        this.jTextFieldEmail = jTextFieldEmail;
+    }
+
+    public JTextField getjTextFieldSenha() {
+        return jTextFieldSenha;
+    }
+
+    public void setjTextFieldSenha(JTextField jTextFieldSenha) {
+        this.jTextFieldSenha = jTextFieldSenha;
+    }
+
+    public JTextField getjTextFieldNome() {
+        return jTextFieldNome;
+    }
+
+    public void setjTextFieldNome(JTextField jTextFieldnomeNome) {
+        this.jTextFieldNome = jTextFieldnomeNome;
+    }
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -95,8 +132,8 @@ public class CadastroView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotaoCadastrar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextFieldEmail;
+    private javax.swing.JTextField jTextFieldNome;
+    private javax.swing.JTextField jTextFieldSenha;
     // End of variables declaration//GEN-END:variables
 }
